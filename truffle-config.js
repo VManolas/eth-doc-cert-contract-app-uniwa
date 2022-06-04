@@ -75,13 +75,11 @@ module.exports = {
     // production: true    // Treats this network as if it was a public net. (default: false)
     // }
     },
-
-    develop: {
-      port: 7545,
-      network_id: 5777,
-      accounts: 5,
-      defaultEtherBalance: 500,
-      blockTime: 3
+    rinkeby: {
+      host: "localhost",
+      port: 8545,
+      network_id: "4",
+      gas: 4000000
     },
 
     // Set default mocha options here, use special reporters etc.

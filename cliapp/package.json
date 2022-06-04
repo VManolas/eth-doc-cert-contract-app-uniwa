@@ -1,0 +1,25 @@
+{
+  "name": "cliapp",
+  "version": "1.0.0",
+  "description": "command line interface to interact with the contract",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "eth-doc-cert-contract-app-uniwa"
+  },
+  "keywords": [
+    "blockchain",
+    "document",
+    "certification"
+  ],
+  "author": "VManolas",
+  "license": "ISC",
+  "dependencies": {
+    "command-line-args": "^5.2.1",
+    "jssha": "^3.2.0",
+    "web3": "^1.7.3"
+  }
+}
