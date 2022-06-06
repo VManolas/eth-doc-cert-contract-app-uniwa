@@ -1,0 +1,4 @@
+# Previous Versions of files that exist in the project but want to keep them locally too (and not in git history)
+previous_versions/
+cliapp/node_modules/
+webapp/node_modules/

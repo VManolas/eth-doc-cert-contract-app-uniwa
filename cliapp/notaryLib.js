@@ -68,8 +68,8 @@ function init() {
 	// !!!We could just read them from the JSON file created by Truffle in the build directory.
 
 	//assign contract address
-	// replace the above address with the one assigned by your Ganache test blockchain
-	// let address = "0xd121f94184Da71908123a1e08F72cAB8573b9363"; //Notary Contract address from author's test Rinkeby
+	// replace the address below with the one assigned by your Ganache test blockchain
+	// let address = "0xd121f94184Da71908123a1e08F72cAB8573b9363"; //Notary Contract address from S.Beyer's test Rinkeby
 	// let address = "0x1Bcc185F72e3452a1de64AD732E7B0684832F7A0"; //Notary Contract address from Ganache
 	let address = "0x0a0f0F7587DdFFBf393e80a9ecC4A313b7Ad5784"; //Notary Contract address from my test Rinkeby
 
@@ -97,6 +97,11 @@ function calculateHashBytes (data) {
 	return hash;
 };
 
+// generate a randomInteger to randomly select account in sendHash function below
+function randomInteger(min, max) {
+	return Math.round(Math.random() * (max - min) + min);
+}
+
 //sends a hash to the blockchain
 //sends a hash value to the contract
 // The function is asynchronous and uses nested callbacks
@@ -110,7 +115,7 @@ function sendHash (hash, callback) {
 		// We use the first address in the accounts[] array.
 		// console.log(accounts); // --> undefined :(
 		contract.methods.addDocHash(hash).send({
-			from: accounts[0]
+			from: accounts[randomInteger(0,4)] // pre-requisites the unlock of all 4 (existing) accounts
 		}, function(error, tx) {
 			if (error) callback(error, null);
 			else callback(null, tx);

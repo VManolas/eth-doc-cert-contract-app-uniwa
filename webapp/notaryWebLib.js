@@ -1,6 +1,6 @@
 // using @metamask/detect-provider to detect the current provider: https://github.com/MetaMask/detect-provider
-// import detectEthereumProvider from '@metamask/detect-provider'
-// const provider = await detectEthereumProvider()
+// import detectEthereumProvider from "@metamask/detect-provider";
+// const provider = detectEthereumProvider();
 // instead of the two above commands, can use the following one: 
 // const provider = require('https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js')
 
@@ -19,35 +19,41 @@ function notary_init () {
     // Thus, our own copy of the web3 code is included in our JS imports and in the html code
  
 /* Warning for deprecated property: window.web3.currentProvider 
+ * Instead use window.ethereum
  * More Info: https://docs.metamask.io/guide/provider-migration.html#replacing-window-web3
  */
   // If an injected web3 object is found,
-  // if (typeof web3 !== 'undefined') {
-  // // we create a new web3 object with our library pointing to the existing provider
-  //   // Use existing gateway
-  //   window.web3 = new Web3(web3.currentProvider);
+  if (typeof web3 !== 'undefined') {
+  // we create a new web3 object with our library pointing to the existing provider
+    // Use existing gateway
+    // window.web3 = new Web3(web3.currentProvider);
+    // from https://github.com/ChainSafe/web3.js/blob/0.20.7/DOCUMENTATION.md#adding-web3
+    web3 = new Web3(web3.currentProvider);
     
-  // // If not, we display an alert
-  // } else {
-  //   alert("No Ethereum interface injected into browser. Read-only access");
-  // }
+  // If not, we display an alert
+  } else {
+    alert("No Ethereum interface injected into browser. Read-only access");
+    // from https://github.com/ChainSafe/web3.js/blob/0.20.7/DOCUMENTATION.md#adding-web3
+    // set the provider you want from Web3.providers
+     web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+  }
 
 /* We should replace this part of code above, 
  * with this part of code below: 
  */
   // if (provider) {
-  //   console.log('Ethereum successfully detected!')
+    // console.log('Ethereum successfully detected!')
 
   //   // From now on, this should always be true:
   //   // provider === window.ethereum
   //   // Access the decentralized web!
   //   // Legacy providers may only have ethereum.sendAsync
-  //   const chainId = await provider.request({
-  //     method: 'eth_chainId'
-  //   })
+    // const chainId = /*await*/ provider.request({
+      // method: 'eth_chainId'
+    // })
   // } else {
-  //   // if the provider is not detected, detectEthereumProvider resolves to null
-  //   console.error('Please install MetaMask!', error)
+    // if the provider is not detected, detectEthereumProvider resolves to null
+    // console.error('Please install MetaMask!', error)
   // }
 
   // From: https://blog.valist.io/how-to-connect-web3-js-to-metamask-in-2020-fee2b2edf58a
@@ -60,14 +66,15 @@ function notary_init () {
   //   }
   //   return false;
   // }
-  const ethEnabled = async () => {
-    if (window.ethereum) {
-      await window.ethereum.request({method: 'eth_requestAccounts'});
-      window.web3 = new Web3(window.ethereum);
-      return true;
-    }
-    return false;
-  }
+
+  // const ethEnabled = async () => {
+  //   if (window.ethereum) {
+  //     await window.ethereum.request({method: 'eth_requestAccounts'});
+  //     window.web3 = new Web3(window.ethereum);
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   abi = [
     {

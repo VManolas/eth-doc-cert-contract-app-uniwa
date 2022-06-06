@@ -16,6 +16,10 @@
     "blockchain",
     "network"
   ],
-  "author": "Vasilis Manolas (copy from STBeyer's tutorial)",
-  "license": "ISC"
+  "author": "Vasilis Manolas (copy from St.Beyer's tutorial)",
+  "license": "ISC",
+  "dependencies": {
+    "@metamask/detect-provider": "^1.2.0",
+    "web3": "^0.20.7"
+  }
 }

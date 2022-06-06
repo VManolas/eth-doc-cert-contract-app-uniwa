@@ -76,10 +76,13 @@ module.exports = {
     // }
     },
     rinkeby: {
-      host: "localhost",
+      host: "127.0.0.1",
+      // host: "localhost",
       port: 8545,
       network_id: "4",
-      gas: 4000000
+      gas: 4000000,
+      // from: "0xfa05c3336de286463e3f2080a5766b8ab0af8676"//eth.accounts[1],
+      // from: "0x33c1ecdefc39e92ba35cd0f81a4b6c5a1c63b799"//eth.accounts[0] -- when no "from" is defined, then accounts[0] is used
     },
 
     // Set default mocha options here, use special reporters etc.
